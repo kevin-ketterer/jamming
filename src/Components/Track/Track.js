@@ -1,15 +1,29 @@
 import React, { Component } from 'react';
 import './Track.css';
 
+const track = {
+    id: 100,
+    name: 'Eruption',
+    artist: 'Van Halen',
+    album: 'Van Halen'
+}
+let isRemoval
+
 class Track extends Component {
+    renderAction() {
+        if (isRemoval) {
+            return <a className="Track-action">+</a>
+        }
+        return <a className="Track-action">-</a>;
+    }
     render() {
         return (
-            <div clclassNameass="Track">
+            <div track={track} className="Track">
                 <div className="Track-information">
-                    {/* <h3><!-- track name will go here --></h3> */}
-                    {/* <p><!-- track artist will go here--> | <!-- track album will go here --></p> */}
+                    <h3>{track.name}</h3>
+                    <p>{track.artist} | {track.album}</p>
                 </div>
-                {/* <a className="Track-action"><!-- + or - will go here --></a> */}
+
             </div>
         );
     }
