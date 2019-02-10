@@ -4,6 +4,10 @@ import SearchBar from '../SearchBar/SearchBar';
 import SearchResults from '../SearchResults/SearchResults';
 import Playlist from '../Playlist/Playlist';
 import Spotify from '../../util/Spotify';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faPlay } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faPlay);
 
 class App extends Component {
   constructor(props) {
