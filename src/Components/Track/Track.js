@@ -12,8 +12,20 @@ class Track extends Component {
         this.state = {
             currentlyPlaying: false,
         };
-        this.togglePlayPreview = this.togglePlayPreview.bind(this);
         this.renderPreview = this.renderPreview.bind(this);
+        this.togglePlayPreview = this.togglePlayPreview.bind(this);
+        this.setAsPlaying = this.setAsPlaying.bind(this);
+        this.getPlayingTrackId = this.getPlayingTrackId.bind(this);
+        this.stopPlayingTrack = this.stopPlayingTrack.bind(this);
+    }
+    setAsPlaying(trackId) {
+        this.props.setPlayingTrackId(trackId);
+    }
+    getPlayingTrackId() {
+        this.props.getPlayingTrackId();
+    }
+    stopPlayingTrack(id) {
+        this.props.stopPlayingTrack(id);
     }
     renderAction() {
         if (this.props.isRemoval) {
@@ -24,7 +36,7 @@ class Track extends Component {
     render() {
         return (
             <div track={this.props.tracks} className="Track">
-                <audio name="media" src={this.props.track.preview} type="audio/mpg" ref="audio" onEnded={() => this.setState({ currentlyPlaying: false })} />
+                <audio id={this.props.track.id} src={this.props.track.preview} type="audio/mpg" ref="audio" onEnded={() => this.setState({ currentlyPlaying: false })} />
                 <div className="Track-preview-container">
                         {this.renderPreview()}
                 </div>
@@ -58,16 +70,23 @@ class Track extends Component {
 
     togglePlayPreview() {
         const audio = this.refs.audio;
+        const playingId = this.props.getPlayingTrackId();
+        
+        if (playingId) {
+            this.props.stopPlayingTrack(playingId);
+        }
         if (!this.state.currentlyPlaying) {
             audio.play();
             this.setState({ 
-                currentlyPlaying: true, 
+                currentlyPlaying: true 
             });
+            this.setAsPlaying(this.props.track.id);
         } else {
             audio.pause();
             this.setState({ 
-                currentlyPlaying: false,
+                currentlyPlaying: false
             });
+            this.setAsPlaying(null); 
         }
     }
 
