@@ -31,11 +31,7 @@ class TrackList extends React.Component {
 
   stopPlayingTrack(id) {
     const playingTrack = this.getPlayingTrack(id)[0];
-    playingTrack.props.setState({ 
-      currentlyPlaying: false
-  });
-    const audio = this.refs.audio;
-    audio.pause();
+ 
   }
 
   render() {

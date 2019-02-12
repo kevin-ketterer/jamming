@@ -73,7 +73,7 @@ class Track extends Component {
         const playingId = this.props.getPlayingTrackId();
         
         if (playingId) {
-            this.props.stopPlayingTrack(playingId);
+            this.stopPlayingTrack(playingId);
         }
         if (!this.state.currentlyPlaying) {
             audio.play();
